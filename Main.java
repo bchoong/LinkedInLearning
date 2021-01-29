@@ -1,17 +1,51 @@
+package com.company;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Triangle triangleA = new Triangle(15,3,3,2,4);
-        Triangle triangleB = new Triangle(3,2.596,4,5,6);
 
-        double triangleAArea = triangleA.findArea();
-        System.out.println(triangleAArea);
-        double triangleBArea = triangleB.findArea();
-        System.out.println(triangleBArea);
+        var sc = new Scanner(System.in);
 
-        System.out.println(Triangle.numOfSides);
+        double d1, d2;
+        try {
+            System.out.print("Enter a numeric value: ");
+            d1 = sc.nextDouble();
+            sc.nextLine();
+
+            System.out.print("Enter a numeric value: ");
+            d2 = sc.nextDouble();
+            sc.nextLine();
+        } catch (InputMismatchException e) {
+            System.out.println("Couldn't format as a number");
+            return;
+        }
+
+        System.out.print("Select an operation (+ - * /): ");
+        var operation = sc.nextLine();
+
+        double result;
+        switch (operation) {
+            case "+":
+                result = CalcHelper.addValues(d1,d2);
+                break;
+            case "-":
+                result = CalcHelper.subtractValues(d1,d2);
+                break;
+            case "*":
+                result = CalcHelper.multiplyValues(d1,d2);
+                break;
+            case "/":
+                result = CalcHelper.divideValues(d1,d2);
+                break;
+            default:
+                System.out.println("You didn't choose a valid operation");
+                return;
+        }
+        System.out.println("The answer is " + result);
     }
 
 }
+
